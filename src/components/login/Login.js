@@ -1,4 +1,7 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {login} from '../../store/actions/loginActions'
+import {Redirect} from 'react-router-dom'
 
 class Login extends Component{
     state = {
@@ -12,7 +15,7 @@ class Login extends Component{
     }
     submit = (e) => {
         e.preventDefault();
-        console.log(this.state)
+        this.props.login(this.state)
     }
     render(){
         return(
@@ -33,4 +36,22 @@ class Login extends Component{
     }
 }
 
-export default Login
+const mapStateToProps = (state) => {
+    return {
+        loginError: state.login.loginError,
+        login: state.firebase.login
+    }
+}
+
+const mapDispathcToProps = (dispatch) => {
+    return {
+        login : (credentials) => {
+            dispatch(login(credentials))
+        }
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispathcToProps
+)(Login)
