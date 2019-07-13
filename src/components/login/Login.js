@@ -18,7 +18,8 @@ class Login extends Component{
         this.props.login(this.state)
     }
     render(){
-        return(
+        if(this.props.status.auth.uid) return <Redirect to="/menu" />
+        return(    
             <div className="login container">
                 <form onSubmit={this.submit}>
                     <div className="input-field col s6">
@@ -31,6 +32,7 @@ class Login extends Component{
                     </div>
                     <button className="btn btn-info" type="submit">Login</button>
                 </form>
+                <p>{this.props.loginError}</p>
             </div>
         )
     }
@@ -39,7 +41,8 @@ class Login extends Component{
 const mapStateToProps = (state) => {
     return {
         loginError: state.login.loginError,
-        login: state.firebase.login
+        login: state.firebase.login,
+        status: state.firebase
     }
 }
 

@@ -1,5 +1,7 @@
 const initState = {
-    loginError: null
+    loginError: null,
+    locationID: null,
+    menuID: null,
 }
 const loginReducer = (state=initState, action) => {
     switch(action.type){
@@ -9,9 +11,11 @@ const loginReducer = (state=initState, action) => {
                 loginError: 'Login Failed'
             }
         case 'LOGIN_SUCCESS':
-            console.log("Login Success");
             return {
                 ...state,
+                uID: action.uID,
+                locationID : action.locationID,
+                menuID: action.menuID,
                 loginError: null
             }
         default:
