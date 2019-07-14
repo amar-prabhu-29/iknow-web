@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import Categories from './Categories';
-
+import Sidebar from '../sidebar/Sidebar'
 
 class Menu extends Component{
     state = {
@@ -14,8 +14,11 @@ class Menu extends Component{
         const {menuList,categories} = this.props
         const item = menuList.map((mL) => <li>{mL.name}</li>)
         return(
-            <div className="menu container">
-                <Categories category={categories} items={menuList} />
+            <div>
+                <Sidebar />
+                <div className="menu container">
+                    <Categories category={categories} items={menuList} />
+                </div>
             </div>
         )
     }
