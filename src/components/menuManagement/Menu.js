@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
-import {login} from '../../store/actions/loginActions'
-import {menuActions} from '../../store/actions/menuActions'
+import Categories from './Categories';
+
 
 class Menu extends Component{
     state = {
@@ -11,10 +11,11 @@ class Menu extends Component{
         menuID: null
     }
     render(){
+        const {menuList,categories} = this.props
+        const item = menuList.map((mL) => <li>{mL.name}</li>)
         return(
             <div className="menu container">
-                
-                Hello Menu
+                <Categories category={categories} items={menuList} />
             </div>
         )
     }
@@ -22,6 +23,7 @@ class Menu extends Component{
 
 const mapStateToProps = (state) => {
     let categories = []
+    let menuList = []
     if(state.login.menuID){
         let menu_categories = state.firestore.data.menu[state.login.menuID].category_ids
         if(menu_categories){
@@ -30,20 +32,30 @@ const mapStateToProps = (state) => {
             })
             let items = state.firestore.data.item
             if(items){
-                console.log(items)
-                items.forEach(item => {
-                    if(item.category_id in menu_categories){
-                        console.log(item)
+                for(var item in items){
+                    if(menu_categories.includes(items[item].category_id)){
+                        let menuItem = {
+                            isactive: items[item].isactive,
+                            kitchen: items[item].kitchen,
+                            name: items[item].name,
+                            price: items[item].price,
+                            priority_order: items[item].priority_order,
+                            type: items[item].type,
+                            veg: items[item].veg,
+                            category: state.firestore.data.menu_category[items[item].category_id].name
+                        }
+                        menuList.push(menuItem)
                     }
-                })
+                }
             }
         }
     }
-    console.log(categories)
-    
+    console.log(menuList)    
     return {
         loginState: state.firebase,
-        loginInfo: state.login
+        loginInfo: state.login,
+        categories: categories,
+        menuList
     }
 }
 

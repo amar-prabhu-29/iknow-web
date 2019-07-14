@@ -18,22 +18,41 @@ class Login extends Component{
         this.props.login(this.state)
     }
     render(){
+        const textStyle = {
+            color: "white",
+        }
+        const right = {
+            float:'right'
+        }
+        const rowStyle = {
+            margin:0
+        }
         if(this.props.status.auth.uid) return <Redirect to="/menu" />
-        return(    
-            <div className="login container">
-                <form onSubmit={this.submit}>
-                    <div className="input-field col s6">
-                        <input id="email" type="email" className="validate" onChange={this.handleChange} />
-                        <label htmlFor="email">Username/Email</label>
+        return(
+                <div className="row black extend">
+                    <div className="col l4"></div>
+                    <div className="col l4">
+                        <div className="login">
+                            <form onSubmit={this.submit}>
+                                <div className="row" style={rowStyle}>
+                                    <div className="input-field col l12">
+                                        <input id="email" type="email" className="validate" onChange={this.handleChange} style={textStyle} />
+                                        <label htmlFor="email">Username/Email</label>
+                                    </div>
+                                </div>
+                                <div className="row" style={rowStyle}>
+                                    <div className="input-field col l12">
+                                        <input id="password" type="password" className="validate" onChange={this.handleChange} style={textStyle} />
+                                        <label htmlFor="password">Password</label>
+                                    </div>
+                                </div>
+                                <button className="btn btn-info" type="submit" style={right}>Login</button>
+                            </form>
+                            <p>{this.props.loginError}</p>
+                        </div>
                     </div>
-                    <div className="input-field col s6">
-                        <input id="password" type="password" className="validate" onChange={this.handleChange} />
-                        <label htmlFor="password">Password</label>
-                    </div>
-                    <button className="btn btn-info" type="submit">Login</button>
-                </form>
-                <p>{this.props.loginError}</p>
-            </div>
+                    <div className="col l4"></div>
+                </div>
         )
     }
 }
