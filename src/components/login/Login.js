@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {login} from '../../store/actions/loginActions'
 import {Redirect} from 'react-router-dom'
+import Logo from '../../logo.png'
 
 class Login extends Component{
     state = {
@@ -27,12 +28,16 @@ class Login extends Component{
         const rowStyle = {
             margin:0
         }
+        const height = {
+            height: '50vh'
+        }
         if(this.props.status.auth.uid) return <Redirect to="/menu" />
         return(
                 <div className="row black extend">
                     <div className="col l4"></div>
                     <div className="col l4">
-                        <div className="login">
+                        <div className="login center-align">
+                            <img src={Logo} alt="" className="responsive-img" style={height}/>
                             <form onSubmit={this.submit}>
                                 <div className="row" style={rowStyle}>
                                     <div className="input-field col l12">
