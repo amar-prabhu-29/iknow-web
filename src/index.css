@@ -20,3 +20,20 @@ code {
 .main{
   margin-left: 300px
 }
+
+.categories-nav{
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  margin-top: 8px;
+}
+.categories-nav{
+  height: 40px;
+  line-height: 40px;
+  width:70%;
+}
+
+.categories-nav ul a {
+  color: black;
+}
