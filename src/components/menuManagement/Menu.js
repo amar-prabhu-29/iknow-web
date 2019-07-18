@@ -4,40 +4,34 @@ import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import Sidebar from '../sidebar/Sidebar'
 import Item from './Item'
-import M from 'materialize-css'
 import Categories from './Categories'
 import {Redirect} from 'react-router-dom'
-
+import Modal from './Modal'
 class Menu extends Component{
     state = {
-        currentCat : ''
+        currentCat : '',
+        catId: ''
     }
     render(){
-        const changeCurrentCat = (catName) => {
+        const changeCurrentCat = (catName,catId) => {
             this.setState(
                 {
-                    currentCat: catName
+                    currentCat: catName,
+                    catId: catId
                 }
             )
         }
         if(!this.props.loginState.auth.uid) return <Redirect to="/login" />
         const {menuList,categories} = this.props
+        console.log(this.state)
         return(
-            <div>
+            
+            <div className="main">
                 <Sidebar />
-
-                    <Categories content={categories} changeCurrentCat={changeCurrentCat}/>
-                    <Item items={menuList} parentCat={this.state.currentCat}></Item>
-
-
-                
-
-
-
-                <div class="fixed-action-btn">
-                    <a className="btn btn-med red">
-                        Add Item
-                    </a>
+                <Categories content={categories} changeCurrentCat={changeCurrentCat}/>
+                <Item items={menuList} parentCat={this.state.currentCat}></Item>
+                <div className="fixed-action-btn">
+                    <Modal buttonName="Add Item" catId={this.state.catId}/>
                 </div>
             </div>
 
@@ -54,7 +48,9 @@ const mapStateToProps = (state) => {
         let menu_categories = state.firestore.data.menu[state.login.menuID].category_ids
         if(menu_categories){
             menu_categories.forEach(category => {
-                categories.push(state.firestore.data.menu_category[category])
+                let cat = {...state.firestore.data.menu_category[category]}
+                cat.id = category;
+                categories.push(cat)
             })
             let items = state.firestore.data.item
             if(items){

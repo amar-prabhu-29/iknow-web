@@ -4,8 +4,9 @@ import React from 'react'
 class Categories extends React.Component {    
     render(){
         const {content, changeCurrentCat} = this.props
+        console.log(content)
         const categoryList = content.map(
-            cN => <li><a onClick={() => {changeCurrentCat(cN.name)}}>{cN.name}</a></li>            
+            cN => <li><a onClick={() => {changeCurrentCat(cN.name,cN.id)}}>{cN.name}</a></li>            
         )
         return(
             
