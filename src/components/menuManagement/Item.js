@@ -8,7 +8,7 @@ class Item extends Component{
         const listItems = items.map(i => {
             if(i.category === parent){
                 return(
-                    <div>
+                    <div key={i.itemID}>
                         <div className="card horizontal">
                                     <div className="card-image" style={ {width:'130px'} }>
                                         <img src={i.imageURL} alt=""/>
@@ -16,7 +16,7 @@ class Item extends Component{
                                     <div className="card-stacked">
                                         <div className="card-content">
                                             <p>{i.name}</p>
-                                            <button class="btn btn-danger" onClick={() => {deleteItem(i.itemID)}}>Delete</button>
+                                            <button className="btn btn-danger" onClick={() => {deleteItem(i.itemID)}}>Delete</button>
                                         </div>
                                     </div>
                         </div>

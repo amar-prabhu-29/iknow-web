@@ -7,7 +7,6 @@ class Sidebar extends Component {
                 <nav className="top-nav blue-grey darken-1">
                     <div className="container">
                         <div className="nav-wrapper">
-                            <a className="brand-logo center"></a>
                             <a href="#" data-activates="nav-mobile" className="button-collapse top-nav full hide-on-large-only"><i className="material-icons">menu</i></a>
                         </div>
                     </div>

@@ -60,9 +60,9 @@ class Modal extends Component {
             </form>
           </div>
           <div className="modal-footer">
-            <a className="modal-close waves-effect waves-red btn-flat">
+            <button className="modal-close waves-effect waves-red btn-flat">
               Close
-            </a>
+            </button>
             
           </div>
         </div>

@@ -8,6 +8,7 @@ import Categories from './Categories'
 import {Redirect} from 'react-router-dom'
 import Modal from './Modal'
 import {deleteItem} from '../../store/actions/menuActions'
+import {refreshState} from '../../store/actions/loginActions'
 class Menu extends Component{
     state = {
         currentCat : '',
@@ -23,6 +24,9 @@ class Menu extends Component{
             )
         }
         if(!this.props.loginState.auth.uid) return <Redirect to="/login" />
+        else if (this.props.loginState.auth.uid && this.props.loginInfo.locationID === null){
+            this.props.refreshState(this.props.loginState.auth.uid)
+        }
         const {menuList,categories} = this.props
         return(
             
@@ -84,7 +88,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteItem: (item) => dispatch(deleteItem(item))
+        deleteItem: (item) => dispatch(deleteItem(item)),
+        refreshState: (uid) => dispatch(refreshState(uid))
     }
 }
 

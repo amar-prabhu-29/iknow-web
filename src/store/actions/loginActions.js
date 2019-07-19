@@ -19,3 +19,16 @@ export const login = (credentials) => {
         })
     }
 }
+
+export const refreshState = (uid) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('user').doc(uid).get().then((snapshot) => {
+            let locationID = snapshot.data().location_id
+            firestore.collection('location').doc(snapshot.data().location_id).get().then((snapshot) => {
+                let menuID = snapshot.data().menu_id
+                dispatch({type: 'LOGIN_SUCCESS',uid,locationID,menuID})
+            })
+        })
+    }
+}
