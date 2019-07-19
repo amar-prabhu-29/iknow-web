@@ -21,3 +21,16 @@ return (dispatch,getState, {getFirebase, getFirestore}) => {
     })
 }
 }
+
+export const deleteItem = (item) => {
+    return (dispatch,getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('item').doc(item).delete().then(() => {
+            dispatch({
+                type:'DELETE_ITEM',
+                item
+            })
+        }
+        )
+    }
+}

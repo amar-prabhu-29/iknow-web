@@ -7,6 +7,7 @@ import Item from './Item'
 import Categories from './Categories'
 import {Redirect} from 'react-router-dom'
 import Modal from './Modal'
+import {deleteItem} from '../../store/actions/menuActions'
 class Menu extends Component{
     state = {
         currentCat : '',
@@ -28,7 +29,7 @@ class Menu extends Component{
             <div className="main">
                 <Sidebar />
                 <Categories content={categories} changeCurrentCat={changeCurrentCat}/>
-                <Item items={menuList} parentCat={this.state.currentCat}></Item>
+                <Item items={menuList} parentCat={this.state.currentCat} deleteItem={this.props.deleteItem}></Item>
                 <div className="fixed-action-btn">
                     <Modal buttonName="Add Item" catId={this.state.catId}/>
                 </div>
@@ -54,8 +55,9 @@ const mapStateToProps = (state) => {
             let items = state.firestore.data.item
             if(items){
                 for(var item in items){
-                    if(menu_categories.includes(items[item].category_id)){
+                    if(items[item] != null && menu_categories.includes(items[item].category_id)){
                         let menuItem = {
+                            itemID: item,
                             isactive: items[item].isactive,
                             kitchen: items[item].kitchen,
                             name: items[item].name,
@@ -82,7 +84,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        deleteItem: (item) => dispatch(deleteItem(item))
     }
 }
 
