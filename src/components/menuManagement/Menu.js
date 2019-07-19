@@ -23,7 +23,6 @@ class Menu extends Component{
         }
         if(!this.props.loginState.auth.uid) return <Redirect to="/login" />
         const {menuList,categories} = this.props
-        console.log(this.state)
         return(
             
             <div className="main">

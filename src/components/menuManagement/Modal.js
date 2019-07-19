@@ -6,13 +6,22 @@ import {connect} from 'react-redux'
 class Modal extends Component {
   state = {
     name: '',
+    imageURL: null,
     category_id: ''
   }
   handleChange = (e) => {
-    this.setState({
+    if(e.target.id === 'imageURL'){
+      this.setState({
+        [e.target.id] : e.target.files[0],
+        category_id: this.props.catId
+      })
+    }
+    else{
+      this.setState({
         [e.target.id] : e.target.value,
         category_id: this.props.catId
-    })        
+      })
+    }
   }
   handleSubmit = (e) => {
       e.preventDefault();
@@ -23,7 +32,7 @@ class Modal extends Component {
       inDuration: 250,
       outDuration: 250,
       opacity: 0.5,
-      dismissible: true,
+      dismissible: false,
       startingTop: "4%",
       endingTop: "10%"
     };
@@ -43,6 +52,7 @@ class Modal extends Component {
             <form onSubmit={this.handleSubmit}>
                 <div className="input-field col l12">
                     <input type="text" id="name" onChange={this.handleChange}/>
+                    <input type="file" id="imageURL" onChange={this.handleChange}/>
                 </div>
                 <button className="modal-close waves-effect waves-green btn-flat" type="submit">
                     Add
