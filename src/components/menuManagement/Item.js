@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import EditModal from './EditModal'
 
 class Item extends Component{
     render(){
@@ -17,6 +18,7 @@ class Item extends Component{
                                         <div className="card-content">
                                             <p>{i.name}</p>
                                             <button className="btn btn-danger" onClick={() => {deleteItem(i.itemID)}}>Delete</button>
+                                            <EditModal itemDetails={i}/>
                                         </div>
                                     </div>
                         </div>

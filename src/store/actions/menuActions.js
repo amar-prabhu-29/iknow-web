@@ -34,3 +34,17 @@ export const deleteItem = (item) => {
         )
     }
 }
+
+export const updateItem = (item,id) => {
+    return (dispatch,getState, {getFirebase, getFirestore}) => {
+        const firestore = getFirestore();
+        firestore.collection('item').doc(id).update(item).then(() => {
+            dispatch({
+                type:'UPDATE_ITEM',
+                item
+            })
+        }).catch((err) => {
+                console.log(err)
+            })
+    }
+}
