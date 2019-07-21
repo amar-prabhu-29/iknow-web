@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
 import Login from './components/login/Login'
 import Menu from './components/menuManagement/Menu'
-import DinerHalls from './components/orderManagement/DinerHalls'
+import Order from './components/orderManagement/Order'
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route path="/login" component={Login} />
           <Route path="/menu" component={Menu} />
-          <Route path="/orders" component={DinerHalls} />
+          <Route path="/orders" component={Order} />
         </Switch>
       </div>
     </BrowserRouter>

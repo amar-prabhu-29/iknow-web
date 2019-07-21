@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import Orders from './OrderDetails'
 class Tables extends Component {
     state = {
-        currentTable: null
+        currentTable: 0
     }
     setActiveTable = (table) => {
         this.setState({
             currentTable: table  //Replace activeHallTables[0] with parameter table after implementation
-        })
-        
+        })   
     }
     render() {
         let activeHallTables = this.props.tables
@@ -16,7 +15,6 @@ class Tables extends Component {
         .map(table => {
             return (table);    {/* Style This Line For Tables inside the return statement  */}
         })
-        this.setActiveTable(activeHallTables[0]);   {/* Remove this line after Implementation of Click Table to change State */}
         return (
             <div>
                 {/* Variable activHallTables displayed Here*/}

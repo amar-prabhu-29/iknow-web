@@ -4,7 +4,7 @@ import Tables from './Tables'
 
 class DinerHalls extends Component{
     state = {
-        location:'BRkK33lNs7mFaalnr0Dn',
+        location: this.props.locationID,
         currentHall : 'AC',
         allHalls : [],
         allTables: []
@@ -12,7 +12,7 @@ class DinerHalls extends Component{
     componentDidMount(){
         let allHalls = []
         let allTables = []
-        const dinerHalls = firebase.database().ref('Location/BRkK33lNs7mFaalnr0Dn/');
+        const dinerHalls = firebase.database().ref('Location/'+this.state.location+'/');
         dinerHalls.on('value',(snapshot) => {
             snapshot.forEach(diners => {
                 allHalls.push(diners.key)
@@ -21,15 +21,13 @@ class DinerHalls extends Component{
                         const curTable = {...table.val(),'hall':diners.key}
                         allTables.push(curTable)
                     })
-                    
                 })
             }) 
             this.setState({
                 allHalls: allHalls,
                 allTables: allTables
             })
-        })
-        
+        })    
     }
     render(){
         return(
