@@ -9,7 +9,6 @@ import {Redirect} from 'react-router-dom'
 import Modal from './Modal'
 import {deleteItem} from '../../store/actions/menuActions'
 import {refreshState} from '../../store/actions/loginActions'
-import { randomBytes } from 'crypto';
 class Menu extends Component{
     state = {
         currentCat : '',

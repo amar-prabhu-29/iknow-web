@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Orders from './OrderDetails'
+import OrderDetails from './OrderDetails'
 class Tables extends Component {
     state = {
         currentTable: 0
@@ -11,14 +11,18 @@ class Tables extends Component {
     }
     render() {
         let activeHallTables = this.props.tables
-        .filter(table => table.hall === this.props.hall)
-        .map(table => {
-            return (table);    {/* Style This Line For Tables inside the return statement  */}
+        let displayTables = []
+        activeHallTables.forEach(table =>{
+            if(table.hall === this.props.hall && table.seated == true){
+                displayTables.push(table)
+            }
         })
+        console.log(displayTables)
         return (
+            
             <div>
                 {/* Variable activHallTables displayed Here*/}
-                <Orders table={this.state.currentTable} /> 
+                <OrderDetails table={this.state.currentTable} /> 
                 {/* state variable currentTable must change whenever a table is clicked or selected. 
                 USE METHOD setActiveTable*/}
             </div>
