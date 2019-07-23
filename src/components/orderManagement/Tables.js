@@ -17,9 +17,7 @@ class Tables extends Component {
                 displayTables.push(table)
             }
         })
-        console.log(displayTables)
         return (
-            
             <div>
                 {/* Variable activHallTables displayed Here*/}
                 <OrderDetails table={this.state.currentTable} /> 
