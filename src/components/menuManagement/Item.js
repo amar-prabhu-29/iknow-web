@@ -17,12 +17,12 @@ class Item extends Component{
                                     <div className="card-stacked">
                                         <div className="card-content" style={{paddingBottom:0,paddingTop:0}}>
                                             <div className="row">
-                                                <div className="col l10">
+                                                <div className="col l9">
                                                     <p><b>{i.name}</b></p>
                                                     <p>{i.price} Rs.</p>
                                                     <p>{i.type}</p>
                                                 </div>
-                                                <div className="col l2">
+                                                <div className="col l3">
                                                     <table>
                                                         <tbody>
                                                             <tr>

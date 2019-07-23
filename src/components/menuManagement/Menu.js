@@ -9,6 +9,7 @@ import {Redirect} from 'react-router-dom'
 import Modal from './Modal'
 import {deleteItem} from '../../store/actions/menuActions'
 import {refreshState} from '../../store/actions/loginActions'
+import { randomBytes } from 'crypto';
 class Menu extends Component{
     state = {
         currentCat : '',
@@ -33,9 +34,11 @@ class Menu extends Component{
             <div className="main">
                 <Sidebar />
                 <Categories content={categories} changeCurrentCat={changeCurrentCat}/>
-                <Item items={menuList} parentCat={this.state.currentCat} deleteItem={this.props.deleteItem}></Item>
-                <div className="fixed-action-btn">
-                    <Modal buttonName="Add Item" catId={this.state.catId}/>
+                <div className="container">   
+                    <Item items={menuList} parentCat={this.state.currentCat} deleteItem={this.props.deleteItem}></Item>
+                    <div className="fixed-action-btn">
+                        <Modal buttonName="Add Item" catId={this.state.catId} />
+                    </div>
                 </div>
             </div>
 

@@ -6,7 +6,6 @@ return (dispatch,getState, {getFirebase, getFirestore}) => {
             url => {return url}
         );
     uploadImage.then(url => {
-        console.log(url)
         item.imageURL = url
         firestore.collection('item').add({
         ...item,
@@ -15,8 +14,10 @@ return (dispatch,getState, {getFirebase, getFirestore}) => {
                 type:'ADD_ITEM',
                 item
             })
+            return true;
         }).catch((err) => {
             dispatch({type: 'ADD_ITEM_ERROR', err})
+            return false;
         })
     })
 }

@@ -25,6 +25,16 @@ class Modal extends Component {
   }
   handleSubmit = (e) => {
       e.preventDefault();
+      if(this.state.veg === "on"){
+        this.setState({
+          'veg': true
+        })
+      }
+      else{
+        this.setState({
+          'veg': false
+        })
+      }
       this.props.addItem(this.state)
   }
   componentDidMount() {
@@ -36,6 +46,8 @@ class Modal extends Component {
       startingTop: "4%",
       endingTop: "10%"
     };
+    var array_of_dom_elements = document.querySelectorAll("input[type=range]");
+    M.Range.init(array_of_dom_elements);
     M.Modal.init(this.Modal, options);
   }
 
@@ -56,7 +68,7 @@ class Modal extends Component {
                     <input type="file" id="imageURL" onChange={this.handleChange}/>
                   </div>
                   <div className="file-path-wrapper">
-                    <input clasName="file-path validate" type="text" />
+                    <input className="file-path validate" type="text" />
                   </div>
                 </div>
                 <div className="input-field col l12">
@@ -67,12 +79,20 @@ class Modal extends Component {
                     <label htmlFor="price">Item Price</label>
                     <input type="number" id="price" onChange={this.handleChange}/>
                 </div>
-                <div className="input-field col s4 m4 l4">
-                  <select id="type" className="browser-default" onChange={this.handleChange}>
-                    <option value="" disabled selected>Choose Type</option>
-                    <option value="FOOD">Food</option>
-                    <option value="DRINK">Drink</option>
-                  </select>
+                <div className="input-field col l6">
+                  <p className="range-field">Select Priority Order
+                    <input type="range" id="priority_order" min="-50" max="50"  onChange={this.handleChange}/>
+                  </p>
+                </div>
+                <div className="input-field col l6">
+                <div className="switch">
+                    <label>
+                      Non Veg
+                      <input id="veg" type="checkbox" onChange={this.handleChange}/>
+                      <span className="lever"></span>
+                      Veg
+                    </label>
+                  </div>
                 </div>
                 <button className="btn col s4 m4 l4" type="submit">
                     Add Item
@@ -92,7 +112,11 @@ class Modal extends Component {
   }
 }
 
-
+const mapStateToProps = (state) => {
+  return{
+    addLastItem: state.menu.addLastItem
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -100,4 +124,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null,mapDispatchToProps)(Modal);
+export default connect(mapStateToProps,mapDispatchToProps)(Modal);
