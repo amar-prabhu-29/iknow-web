@@ -43,19 +43,41 @@ class Modal extends Component {
     return (
       <div key={this.props.key}>
         <a className="btn modal-trigger" data-target="modaladdItem">
-          {this.props.buttonName}
+          <i className="large material-icons">add</i>
         </a>
         <div ref={Modal => {this.Modal = Modal;}} id="modaladdItem" className="modal">
           <div className="modal-content">
             <h4>{this.props.buttonName}</h4>
             <form onSubmit={this.handleSubmit}>
-                <div className="input-field col l12">
-                    <input type="text" id="name" onChange={this.handleChange}/>
+              <div className="row">
+                <div className="file-field input-field">
+                  <div className="btn">
+                    <span>Select Food Image</span>
                     <input type="file" id="imageURL" onChange={this.handleChange}/>
+                  </div>
+                  <div className="file-path-wrapper">
+                    <input clasName="file-path validate" type="text" />
+                  </div>
                 </div>
-                <button className="modal-close waves-effect waves-green btn-flat" type="submit">
-                    Add
+                <div className="input-field col l12">
+                    <label htmlFor="name">Item Name</label>
+                    <input type="text" id="name" onChange={this.handleChange}/>
+                </div>
+                <div className="input-field col l12">
+                    <label htmlFor="price">Item Price</label>
+                    <input type="number" id="price" onChange={this.handleChange}/>
+                </div>
+                <div className="input-field col s4 m4 l4">
+                  <select id="type" className="browser-default" onChange={this.handleChange}>
+                    <option value="" disabled selected>Choose Type</option>
+                    <option value="FOOD">Food</option>
+                    <option value="DRINK">Drink</option>
+                  </select>
+                </div>
+                <button className="btn col s4 m4 l4" type="submit">
+                    Add Item
                 </button>
+                </div>
             </form>
           </div>
           <div className="modal-footer">

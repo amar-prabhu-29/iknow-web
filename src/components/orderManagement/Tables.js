@@ -6,7 +6,7 @@ class Tables extends Component {
     }
     setActiveTable = (table) => {
         this.setState({
-            currentTable: table  //Replace activeHallTables[0] with parameter table after implementation
+            currentTable: table 
         })   
     }
     render() {
@@ -20,7 +20,7 @@ class Tables extends Component {
                 {/* Variable activHallTables displayed Here*/}
                 <Orders table={this.state.currentTable} /> 
                 {/* state variable currentTable must change whenever a table is clicked or selected. 
-                USE METHOD setActiveTable AS IMPLEMENTED ON LINE 19 */}
+                USE METHOD setActiveTable*/}
             </div>
         )
     }

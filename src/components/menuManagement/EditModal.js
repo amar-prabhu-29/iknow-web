@@ -40,7 +40,7 @@ class EditModal extends Component {
     return (
       <div key={this.props.itemDetails.itemID}>
         <a className="btn modal-trigger" data-target={this.props.itemDetails.itemID}>
-          Edit Item
+          <i className="material-icons">edit</i>
         </a>
         <div ref={Modal => {this.Modal = Modal;}} id={this.props.itemDetails.itemID} className="modal">
           <div className="modal-content">
