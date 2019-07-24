@@ -12,12 +12,10 @@ class DinerHalls extends Component{
     componentDidMount(){
         let allHalls = []
         let allTables = []
-        this.setState({
-            allHalls: allHalls,
-            allTables: allTables
-        })
         const dinerHalls = firebase.database().ref('Location/'+this.state.location+'/');
         dinerHalls.on('value',(snapshot) => {
+            allHalls = []
+            allTables = []
             snapshot.forEach(diners => {
                 allHalls.push(diners.key)
                 diners.forEach(tables => {

@@ -14,7 +14,7 @@ class OrderDetails extends Component {
                         <td>{item.status}</td>
                         <td>{item.quantity}</td>
                         <td>{item.price}</td>
-                        <td><button className="btn red" onClick={() => {this.props.deleteItem("ref")}}>R</button></td>
+                        <td><button className="btn red" onClick={() => {this.props.deleteItem(table.hall+"/Tables/"+(table.tableNO-1)+"/Cart/items/"+index)}}>R</button></td>
                     </tr>
                 )
             }
@@ -50,7 +50,7 @@ class OrderDetails extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        deleteItem: (ref) => dispatch(deleteItem(ref))
+    deleteItem: (ref) => dispatch(deleteItem(ref))
     }
 }
 
