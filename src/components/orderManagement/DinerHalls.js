@@ -5,13 +5,17 @@ import Tables from './Tables'
 class DinerHalls extends Component{
     state = {
         location: this.props.locationID,
-        currentHall : 'AC',
+        currentHall : 'Non AC',
         allHalls : [],
         allTables: []
     }
     componentDidMount(){
         let allHalls = []
         let allTables = []
+        this.setState({
+            allHalls: allHalls,
+            allTables: allTables
+        })
         const dinerHalls = firebase.database().ref('Location/'+this.state.location+'/');
         dinerHalls.on('value',(snapshot) => {
             snapshot.forEach(diners => {
@@ -22,7 +26,7 @@ class DinerHalls extends Component{
                         allTables.push(curTable)
                     })
                 })
-            }) 
+            })
             this.setState({
                 allHalls: allHalls,
                 allTables: allTables
@@ -30,7 +34,6 @@ class DinerHalls extends Component{
         })    
     }
     render(){
-        console.log(this.state)
         return(
         <div>
             <Tables tables={this.state.allTables} hall={this.state.currentHall} />

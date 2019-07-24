@@ -1,13 +1,57 @@
 import React, { Component } from 'react'
-
+import {connect} from 'react-redux'
+import {deleteItem} from '../../store/actions/orderActions'
 class OrderDetails extends Component {
     render() {
+        let {table} = this.props
+        if(table != null){
+            let allItems=<tr><td></td><td></td><td>NO ITEMS ORDERED</td><td></td><td></td><td></td></tr>
+            if(table.Cart.items){
+                allItems = table.Cart.items.map((item,index) => 
+                    <tr key={item.item_id}>
+                        <td>{item.name}</td>
+                        <td>Add ON</td>
+                        <td>{item.status}</td>
+                        <td>{item.quantity}</td>
+                        <td>{item.price}</td>
+                        <td><button className="btn red" onClick={() => {this.props.deleteItem("ref")}}>R</button></td>
+                    </tr>
+                )
+            }
         return (
             <div>
-                
+                <table className="centered responsive-table">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Add On</th>
+                            <th>Status</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {allItems}
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
+    else{
+        return (
+            <div>
+
             </div>
         )
     }
 }
+}
 
-export default OrderDetails
+const mapDispatchToProps = (dispatch) => {
+    return{
+        deleteItem: (ref) => dispatch(deleteItem(ref))
+    }
+}
+
+export default connect(null,mapDispatchToProps)(OrderDetails)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import OrderDetails from './OrderDetails'
 class Tables extends Component {
     state = {
-        currentTable: 0
+        currentTable: null
     }
     setActiveTable = (table) => {
         this.setState({
@@ -12,17 +12,25 @@ class Tables extends Component {
     render() {
         let activeHallTables = this.props.tables
         let displayTables = []
+        let tableCounter = 1
         activeHallTables.forEach(table =>{
-            if(table.hall === this.props.hall && table.seated == true){
+            if(table.hall === this.props.hall && table.Seated == true){
+                table.tableNO = tableCounter
                 displayTables.push(table)
+                tableCounter+=1
             }
+            else if(table.hall === this.props.hall){
+                tableCounter+=1
+            }
+            
         })
-        return (
+        let tables = displayTables.map(table =>
+            <button onClick={() => {this.setActiveTable(table)}} className="btn" key={table.OrderID}>{table.tableNO}</button>
+        )
+        return ( 
             <div>
-                {/* Variable activHallTables displayed Here*/}
+                {tables}
                 <OrderDetails table={this.state.currentTable} /> 
-                {/* state variable currentTable must change whenever a table is clicked or selected. 
-                USE METHOD setActiveTable*/}
             </div>
         )
     }
