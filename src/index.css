@@ -37,3 +37,8 @@ code {
 .categories-nav ul a {
   color: black;
 }
+
+table > tbody > tr > td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

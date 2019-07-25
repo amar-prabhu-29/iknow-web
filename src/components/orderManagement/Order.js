@@ -7,11 +7,11 @@ import Sidebar from '../sidebar/Sidebar'
 import CompletedOrders from './completedOrders/completedOrders'
 class Order extends Component {
     state = {
-        currentActive : "A"
+        currentActive : "A",
     }
     changeState = (state) => {
         this.setState({
-            currentActive: state
+            currentActive: state,
         })
     }
     render() {
@@ -32,12 +32,18 @@ class Order extends Component {
             <div>
                 <Sidebar />
                 <div className="main">
-                    <div>
-                        <button className="btn" onClick={()=>this.changeState("A")}>Active Orders</button>
-                        <button className="btn" onClick={()=>this.changeState("C")}>Completed Orders</button>
+                    <div style={{textAlign: "center",marginTop: '5px',clear:"both"}}>
+                        <h6>
+                            <span onClick={()=>this.changeState("A")}><b>Active Orders</b></span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span onClick={()=>this.changeState("C")}><b>Completed Orders</b></span>
+                        </h6>
                     </div>
-                    <hr />
-                    {display}
+                    <br />
+                    <div style={{textAlign:"center"}}>
+                        {display}
+                    </div>
+                    
                 </div>
             </div>
         )

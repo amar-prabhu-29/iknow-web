@@ -13,26 +13,36 @@ class completedOrders extends Component {
         if(this.props.orders){
             for(let order in this.props.orders){
                 let curOrder = this.props.orders[order]
-                curOrder.orderID = order
+                curOrder['orderID'] = order
                 if(this.props.orders[order].location_id === this.props.locationID){
                     completedOrders.push(curOrder)
                 }
             }
             console.log(completedOrders)
             displayOrders = completedOrders.map(order => 
-                <li key={order.orderID}>
-                    <div className="collapsible-header">Order ID:{order.orderID} No Of Guests = {order.no_of_guest}</div>
-                    <div className="collapsible-body"><span>
-                        
-                    </span></div>
-                </li>
+                <tr key={order.orderID}>
+                    <td>{order.orderID}</td>
+                    <td>{order.no_of_guest}</td>
+                    <td>Amount</td>
+                    <td>Order Details</td>
+                </tr>
             )
         }
         return (
             <div>
-                <ul className="collapsible">
-                    {displayOrders}
-                </ul>
+                <table className="centered responsive-table">
+                    <thead style={{backgroundColor: '#ff5252'}}>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>No. Of Guests</th>
+                            <th>Amount</th>
+                            <th>Order Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {displayOrders}
+                    </tbody>
+                </table>
             </div>
         )
     }

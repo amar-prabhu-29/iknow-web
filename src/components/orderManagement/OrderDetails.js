@@ -21,15 +21,15 @@ class OrderDetails extends Component {
                         <td>Add ON</td>
                         <td>{item.status}</td>
                         <td>{item.quantity}</td>
-                        <td>{item.price}</td>
-                        <td><button className="btn red" onClick={() => {this.props.deleteItem(table.hall+"/Tables/"+(table.tableNO-1)+"/Cart/items/"+index)}}>R</button></td>
+                        <td>Rs. {item.price}</td>
+                        <td><span onClick={() => {this.props.deleteItem(table.hall+"/Tables/"+(table.tableNO-1)+"/Cart/items/"+index)}} style={{cursor: 'pointer'}}><i class="material-icons">delete</i></span></td>
                     </tr>
                 )
             }
         return (
-            <div>
+            <div style={{margin: '0px 20px 0px 20px'}}>
                 <table className="centered responsive-table">
-                    <thead>
+                    <thead style={{backgroundColor: '#ff5252'}}>
                         <tr>
                             <th>Item Name</th>
                             <th>Add On</th>

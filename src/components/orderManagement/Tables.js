@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import OrderDetails from './OrderDetails'
+import TableImage from '../assets/Icon_Table.png'
 class Tables extends Component {
     state = {
         currentTable: null,
@@ -10,7 +11,6 @@ class Tables extends Component {
         })   
     }
     render() {
-        console.log("Called Render Tables")
         let activeHallTables = this.props.tables
         let displayTables = []
         let tableCounter = 1
@@ -25,11 +25,18 @@ class Tables extends Component {
             }    
         })
         let tables = displayTables.map(table =>
-            <button onClick={() => {this.setActiveTable(table.OrderID)}} className="btn" key={table.OrderID}>{table.tableNO}</button>
+            <div className="col l2">
+                <span style={{color:'#CB212E'}}><b>{table.tableNO}</b></span>
+                <img className="responsive-img" src={TableImage} onClick={() => {this.setActiveTable(table.OrderID)}} key={table.OrderID} />
+            </div>
+            
         )
         return ( 
             <div>
-                {tables}
+                <div className="row" style={{marginLeft: '20px',marginRight: '20px'}}>
+                    {tables}
+                </div>
+                <br />
                 <OrderDetails tables={displayTables} current={this.state.currentTable} /> 
             </div>
         )
