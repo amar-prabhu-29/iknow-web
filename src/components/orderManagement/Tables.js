@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import OrderDetails from './OrderDetails'
 class Tables extends Component {
     state = {
-        currentTable: null
+        currentTable: null,
+        key:null
     }
-    setActiveTable = (table) => {
+    setActiveTable = (table,key) => {
         this.setState({
-            currentTable: table 
+            currentTable: table,
+            key: key
         })   
     }
     render() {
@@ -21,11 +23,10 @@ class Tables extends Component {
             }
             else if(table.hall === this.props.hall){
                 tableCounter+=1
-            }
-            
+            }    
         })
         let tables = displayTables.map(table =>
-            <button onClick={() => {this.setActiveTable(table)}} className="btn" key={table.OrderID}>{table.tableNO}</button>
+            <button onClick={() => {this.setActiveTable(table,table.OrderID)}} className="btn" key={table.OrderID}>{table.tableNO}</button>
         )
         return ( 
             <div>

@@ -29,7 +29,7 @@ class DinerHalls extends Component{
                 allHalls: allHalls,
                 allTables: allTables
             })
-        })    
+        })
     }
     render(){
         return(
