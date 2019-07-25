@@ -3,7 +3,15 @@ import {connect} from 'react-redux'
 import {deleteItem} from '../../store/actions/orderActions'
 class OrderDetails extends Component {
     render() {
-        let {table} = this.props
+        let table = null
+        let {tables,current} = this.props
+        if(tables!=null && current!=null){
+            for(let curTable in tables){
+                if(tables[curTable].OrderID === current){
+                    table = tables[curTable]
+                }
+            }
+        }
         if(table != null){
             let allItems=<tr><td></td><td></td><td>NO ITEMS ORDERED</td><td></td><td></td><td></td></tr>
             if(table.Cart.items){

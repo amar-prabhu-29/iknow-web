@@ -53,7 +53,7 @@ class Modal extends Component {
 
   render() {
     return (
-      <div key={this.props.key}>
+      <div>
         <a className="btn modal-trigger" data-target="modaladdItem">
           <i className="large material-icons">add</i>
         </a>

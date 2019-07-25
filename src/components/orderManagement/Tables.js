@@ -3,15 +3,14 @@ import OrderDetails from './OrderDetails'
 class Tables extends Component {
     state = {
         currentTable: null,
-        key:null
     }
-    setActiveTable = (table,key) => {
+    setActiveTable = (ID) => {
         this.setState({
-            currentTable: table,
-            key: key
+            currentTable: ID,
         })   
     }
     render() {
+        console.log("Called Render Tables")
         let activeHallTables = this.props.tables
         let displayTables = []
         let tableCounter = 1
@@ -26,12 +25,12 @@ class Tables extends Component {
             }    
         })
         let tables = displayTables.map(table =>
-            <button onClick={() => {this.setActiveTable(table,table.OrderID)}} className="btn" key={table.OrderID}>{table.tableNO}</button>
+            <button onClick={() => {this.setActiveTable(table.OrderID)}} className="btn" key={table.OrderID}>{table.tableNO}</button>
         )
         return ( 
             <div>
                 {tables}
-                <OrderDetails table={this.state.currentTable} /> 
+                <OrderDetails tables={displayTables} current={this.state.currentTable} /> 
             </div>
         )
     }

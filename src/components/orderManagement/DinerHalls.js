@@ -32,6 +32,7 @@ class DinerHalls extends Component{
         })
     }
     render(){
+        console.log("Called Render")
         return(
         <div>
             <Tables tables={this.state.allTables} hall={this.state.currentHall} />
