@@ -1,7 +1,11 @@
 import React,{Component} from 'react'
 import EditModal from './EditModal'
-
+import M from 'materialize-css'
 class Item extends Component{
+    componentDidUpdate(){
+        var elems = document.querySelectorAll('.collapsible');
+        M.Collapsible.init(elems);
+    }
     render(){
         const items = this.props.items
         const parent = this.props.parentCat
@@ -10,41 +14,38 @@ class Item extends Component{
             if(i.category === parent){
                 return(
                     <div key={i.itemID}>
-                        <div className="card horizontal">
-                                    <div className="card-image" style={ {width:'130px'} }>
-                                        <img src={i.imageURL} alt="" style={{'borderRadius': '5%'}}/>
-                                    </div>
-                                    <div className="card-stacked">
-                                        <div className="card-content" style={{paddingBottom:0,paddingTop:0}}>
-                                            <div className="row">
-                                                <div className="col l9">
-                                                    <p><b>{i.name}</b></p>
-                                                    <p>{i.price} Rs.</p>
-                                                    <p>{i.type}</p>
-                                                </div>
-                                                <div className="col l3">
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <button className="btn red" onClick={() => {deleteItem(i.itemID)}}><i className="material-icons">delete_forever</i></button>
-                                                                </td>
-                                                                <td>
-                                                                    <EditModal itemDetails={i}/>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                        
-                                                    </table>
-                                                    
-                                                    
-                                                </div>
+                        <ul className="collapsible">
+                            <li>
+                                <div className="collapsible-header" style={{padding:0}}>
+                                    <div className="row" style={{margin:0}}>
+                                        <div className="col l3">
+                                            <div style={{margin:'5px'}}>
+                                                <img className="responsive-img" src={i.imageURL} alt="" style={{'borderRadius': '5%'}}/>
                                             </div>
-                                            
-                                            
                                         </div>
-                                    </div>
-                        </div>
+                                        <div className="col l6">
+                                            <h5 style={{margin:'10px 0px 0px 0px'}}>{i.name}</h5>
+                                            <p style={{margin:'5px 0px 0px 0px'}}><small>{i.type}</small></p>
+                                        </div>
+                                        <div className="col l3">
+                                            <div style={{float:'right'}}>
+                                                <h6><b>{i.price} Rs.</b></h6>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                </div>
+                                <div className="collapsible-body">
+                                    <div>Test Body</div>
+                                    <span style={{float:'left'}}>
+                                        <EditModal itemDetails={i}/>
+                                    </span>
+                                    <span style={{float:'right'}}>
+                                        <button className="btn red" onClick={() => {deleteItem(i.itemID)}}><i className="material-icons">delete_forever</i></button>
+                                    </span>
+                                    <br />
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 )
             }

@@ -18,7 +18,6 @@ class completedOrders extends Component {
                     completedOrders.push(curOrder)
                 }
             }
-            console.log(completedOrders)
             displayOrders = completedOrders.map(order => 
                 <tr key={order.orderID}>
                     <td>{order.orderID}</td>
@@ -29,7 +28,7 @@ class completedOrders extends Component {
             )
         }
         return (
-            <div>
+            <div style={{margin: '0px 20px 0px 20px'}}>
                 <table className="centered responsive-table">
                     <thead style={{backgroundColor: '#ff5252'}}>
                         <tr>
