@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import M from 'materialize-css'
+import Feedback from './Feedback'
+import OrderDetails from './Details'
 class completedOrders extends Component {
     componentDidMount(){
         M.AutoInit();
@@ -18,12 +20,19 @@ class completedOrders extends Component {
                     completedOrders.push(curOrder)
                 }
             }
+            const getSum = (items) => {
+                let sum = 0
+                for(let i in items){
+                    sum = sum+items[i].price
+                }
+                return sum
+            }
             displayOrders = completedOrders.map(order => 
                 <tr key={order.orderID}>
-                    <td>{order.orderID}</td>
+                    <td><Feedback orderID={order.orderID} feedback={order.feedback}/></td>
                     <td>{order.no_of_guest}</td>
-                    <td>Amount</td>
-                    <td>Order Details</td>
+                    <td>Rs. {getSum(order.items)}</td>
+                    <td><OrderDetails orderID={order.orderID} items={order.items} /></td>
                 </tr>
             )
         }
