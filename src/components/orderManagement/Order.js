@@ -8,11 +8,22 @@ import CompletedOrders from './completedOrders/completedOrders'
 class Order extends Component {
     state = {
         currentActive : "A",
+        classA: 'orders-active',
+        classB: ''
     }
     changeState = (state) => {
-        this.setState({
-            currentActive: state,
-        })
+        if(state === "A")
+            this.setState({
+                currentActive: state,
+                classA: 'orders-active',
+                classB: ''
+            })
+        else
+            this.setState({
+                currentActive: state,
+                classA: '',
+                classB: 'orders-active'
+            })
     }
     render() {
         let display = ''
@@ -34,9 +45,9 @@ class Order extends Component {
                 <div className="main">
                     <div style={{textAlign: "center",marginTop: '5px',clear:"both"}}>
                         <h6>
-                            <span onClick={()=>this.changeState("A")}><b>Active Orders</b></span>
+                            <span className={this.state.classA} style={{cursor:'pointer'}} onClick={()=>this.changeState("A")}><b>Active Orders</b></span>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <span onClick={()=>this.changeState("C")}><b>Completed Orders</b></span>
+                            <span className={this.state.classB} style={{cursor:'pointer'}} onClick={()=>this.changeState("C")}><b>Completed Orders</b></span>
                         </h6>
                     </div>
                     <br />

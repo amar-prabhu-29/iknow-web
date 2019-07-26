@@ -27,7 +27,7 @@ class Tables extends Component {
         let tables = displayTables.map(table =>
             <div className="col l2">
                 <span style={{color:'#CB212E'}}><b>{table.tableNO}</b></span>
-                <img className="responsive-img" src={TableImage} onClick={() => {this.setActiveTable(table.OrderID)}} key={table.OrderID} />
+                <img className="responsive-img" src={TableImage} style={{cursor:'pointer'}} onClick={() => {this.setActiveTable(table.OrderID)}} key={table.OrderID} />
             </div>
             
         )

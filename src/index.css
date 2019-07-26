@@ -48,3 +48,9 @@ table > tbody > tr > td {
     margin-left:0px;
   }
 }
+
+
+/* For Orders Component */
+.orders-active{
+  border-bottom: 2px solid #ff5252;
+}
