@@ -9,9 +9,14 @@ export const login = (credentials) => {
             let uID = response.user.uid
             firestore.collection('user').doc(response.user.uid).get().then((snapshot) => {
                 let locationID = snapshot.data().location_id
+                let businessID = snapshot.data().business_id
+                let logoURL = ''
+                firestore.collection('business').doc(businessID).get().then((snapshot) => {
+                    logoURL = snapshot.data().logoURL
+                })
                 firestore.collection('location').doc(snapshot.data().location_id).get().then((snapshot) => {
                     let menuID = snapshot.data().menu_id
-                    dispatch({type: 'LOGIN_SUCCESS',uID,locationID,menuID})
+                    dispatch({type: 'LOGIN_SUCCESS',uID,locationID,menuID,logoURL})
                 })
             })
         }).catch((err) => {
@@ -25,9 +30,14 @@ export const refreshState = (uid) => {
         const firestore = getFirestore();
         firestore.collection('user').doc(uid).get().then((snapshot) => {
             let locationID = snapshot.data().location_id
+            let businessID = snapshot.data().business_id
+            let logoURL = ''
+            firestore.collection('business').doc(businessID).get().then((snapshot) => {
+                logoURL = snapshot.data().logoURL
+            })
             firestore.collection('location').doc(snapshot.data().location_id).get().then((snapshot) => {
                 let menuID = snapshot.data().menu_id
-                dispatch({type: 'LOGIN_SUCCESS',uid,locationID,menuID})
+                dispatch({type: 'LOGIN_SUCCESS',uid,locationID,menuID,logoURL})
             })
         })
     }
