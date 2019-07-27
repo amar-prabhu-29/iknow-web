@@ -63,6 +63,7 @@ const mapStateToProps = (state) => {
                 for(var item in items){
                     if(items[item] != null && menu_categories.includes(items[item].category_id)){
                         let menuItem = {
+                            customizations: items[item].Customizations,
                             itemID: item,
                             isactive: items[item].isactive,
                             kitchen: items[item].kitchen,

@@ -7,11 +7,52 @@ class Item extends Component{
         M.Collapsible.init(elems);
     }
     render(){
+        const spreadOptions = (options) => {
+            return (
+                options.map(o =>
+                    <div className="row" style={{marginBottom: 0}}>
+                        <div className="col l6">
+                            {o.Name}
+                        </div>
+                        <div className="col l6">
+                            {o.Price}
+                        </div>
+                    </div>
+                )
+            )
+        }
         const items = this.props.items
         const parent = this.props.parentCat
         const deleteItem = this.props.deleteItem
         const listItems = items.map(i => {
             if(i.category === parent){
+                let custNames = <div className="row" style={{marginBottom: 0}}>
+                <div className="col l3">
+                    NA
+                </div>
+                <div className="col l9">
+                    <div className="row" style={{marginBottom: 0}}>
+                        <div className="col l6">
+                            NA
+                        </div>
+                        <div className="col l6">
+                            NA
+                        </div>
+                    </div>
+                </div>
+            </div>
+                if(i.customizations.length != 0){
+                    custNames = i.customizations.map(cust => 
+                        <div className="row" style={{marginBottom: 0}}>
+                            <div className="col l3">
+                                {typeof cust.Name === 'undefined'?"NA":cust.Name}
+                            </div>
+                            <div className="col l9">
+                                {spreadOptions(cust.Options)}
+                            </div>
+                        </div>
+                    )
+                }
                 return(
                     <div key={i.itemID}>
                         <ul className="collapsible">
@@ -35,7 +76,25 @@ class Item extends Component{
                                     </div>   
                                 </div>
                                 <div className="collapsible-body">
-                                    <div>Test Body</div>
+                                    <div>
+                                        <div className="row" style={{marginBottom: 0}}>
+                                            <div className="col l3">
+                                                <b>Add On Type</b>
+                                            </div>
+                                            <div className="col l9">
+                                                <div className="row" style={{marginBottom: 0}}>
+                                                    <div className="col l6">
+                                                        <b>Add On Name</b>
+                                                    </div>
+                                                    <div className="col l6">
+                                                        <b>Add On Price</b>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {custNames}
+                                        <br />
+                                    </div>
                                     <span style={{float:'left'}}>
                                         <EditModal itemDetails={i}/>
                                     </span>
